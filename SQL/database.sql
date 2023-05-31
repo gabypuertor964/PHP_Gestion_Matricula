@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2023 a las 14:33:35
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Tiempo de generación: 31-05-2023 a las 15:33:30
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `bd_gestionmatricula`
 --
+CREATE DATABASE IF NOT EXISTS `bd_gestionmatricula` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `bd_gestionmatricula`;
 
 -- --------------------------------------------------------
 
@@ -27,12 +29,13 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `curso`
 --
 
+DROP TABLE IF EXISTS `curso`;
 CREATE TABLE `curso` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `duracion` int(11) NOT NULL,
   `precioNeto` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -40,10 +43,11 @@ CREATE TABLE `curso` (
 -- Estructura de tabla para la tabla `entidad`
 --
 
+DROP TABLE IF EXISTS `entidad`;
 CREATE TABLE `entidad` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -51,6 +55,7 @@ CREATE TABLE `entidad` (
 -- Estructura de tabla para la tabla `estudiante`
 --
 
+DROP TABLE IF EXISTS `estudiante`;
 CREATE TABLE `estudiante` (
   `Num_doc` int(11) NOT NULL,
   `nombres` varchar(100) NOT NULL,
@@ -59,7 +64,7 @@ CREATE TABLE `estudiante` (
   `edad` int(11) NOT NULL,
   `entidad` varchar(50) NOT NULL,
   `fkEntidadId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -67,6 +72,7 @@ CREATE TABLE `estudiante` (
 -- Estructura de tabla para la tabla `matricula`
 --
 
+DROP TABLE IF EXISTS `matricula`;
 CREATE TABLE `matricula` (
   `id` int(11) NOT NULL,
   `fkCursoId` int(11) NOT NULL,
@@ -75,7 +81,7 @@ CREATE TABLE `matricula` (
   `totalDesc` int(11) NOT NULL,
   `totalPago` int(11) NOT NULL,
   `fechaMat` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tablas volcadas

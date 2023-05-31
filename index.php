@@ -1,20 +1,22 @@
-<!doctype html>
-<html lang="en">
+<?php
+  //Activacion de la sesion
+  session_start();
 
-<head>
-  <title>Inicio</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  /*
+    Se enviara a traves al archivo header, la sigueinte informacion a traves de la variable SESSION:
 
-  <!-- Bootstrap CSS v5.2. -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="addons/style.css">
+      1. Titulo de la Cabecera de la Pagina
+      2. Prefijo de ruta -> Este indicara, que tanto se debe afectar la ruta a los archivos de estilo, de acuerdo a la ubicacion de la vista
 
-</head>
+  */
+  $_SESSION['title']="Inicio de Sesion";
+  $_SESSION['prefix']=null;
 
-<body>
+  //Importar el archivo que contiene la cabecera de la pagina
+  require("views/header.php");
+?>
+
+
   <header>
     <!-- place navbar here -->
   </header>
@@ -26,7 +28,7 @@
             <div class="card-header">
               <h4 class="card-title">Inicia Sesión</h4>
             </div>
-            <form action="" method="post">
+            <form action="controller/login.php" method="post">
                 <div class="card-body">
                    <div class="mb-3">
                      <label for="num_id" class="form-label">Numero de identificación</label>
@@ -53,6 +55,3 @@
  
 
   
-</body>
-
-</html>

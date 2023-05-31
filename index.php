@@ -18,12 +18,12 @@
     <!-- place navbar here -->
   </header>
   <main>
-    <div class="card">
+    <div class="container">
         <form>
-    <div class="container md-6">
+    <div class="card md-6">
         <label for="" class="form-label">Número de Identificación</label>
         <input type="number" class="form-control" id="identificacion">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+       
     </div>
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>

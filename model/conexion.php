@@ -6,7 +6,7 @@
    $usuarioBD = "root";
    $contrasenaBD = "";
 
-   $nombreBD = "bd_gestionmatricula";
+   $nombreBD = "dbGestionMatriculas";
 
 
    //variable que contiene los datos para la conexion
@@ -16,7 +16,9 @@
       echo "Fallo al conectar a MySQL: (" . $con->connect_errno . ") " . $con->connect_error;
   }
   
-  echo $con->host_info . "\n";
-  ?>
+  //echo $con->host_info . "\n";
+
+  $numero_documento=1019604622;
+  var_dump($con->query("CALL consultarEstudiante($numero_documento)"));
 
 ?>

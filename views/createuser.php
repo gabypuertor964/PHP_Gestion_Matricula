@@ -55,6 +55,7 @@
                               <input type="password"
                                 class="form-control" name="contrasena" id="contrasena" aria-describedby="helpId" placeholder="Asegurate de que sea segura :)">
                             </div>
+                            
                           </div>
                           <div class="card-footer text-muted">
                              

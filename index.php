@@ -32,30 +32,44 @@
             <img src="addons/imagenes/inicio.png" >
           </div>
   
-            <div class="col-md-6  text-center ">         
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">Inicia Sesión</h4>
-                </div>
-              <form action="controller/login.php" method="post">
-                <div class="card-body">
-                  <div class="mb-3">
-                    <label for="num_id" class="form-label">Número de identificación</label>
-                    <input type="number"class="form-control" name="num_id" id="num_id" aria-describedby="helpId" placeholder="">
-                  </div>
-                  <div class="mb-3">
-                    <label for="" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" name="contrasena" id="contrasena" aria-describedby="helpId" placeholder="">
-                  </div>
-                  </div>
-                    <div class="card-footer text-muted">
-                      <button type="submit" class="btn btn-primary">Enviar</button>
-                    </div>
-                </form>
-              </div>
+          <div class="col-md-6 text-center">      
+
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">Inicia Sesión</h4>
             </div>
+
+            <form action="controller/login.php" method="post">
+
+              <div class="card-body">
+
+                <div class="mb-3">
+                  <label for="num_id" class="form-label">Número de identificación</label>
+                  <input type="number"class="form-control" name="num_id" id="num_id" aria-describedby="helpId" placeholder="">
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">Contraseña</label>
+                  <input type="password" class="form-control" name="contrasena" id="contrasena" aria-describedby="helpId" placeholder="">
+                </div>
+
+              </div>
+
+              <div class="card-footer text-muted">
+
+                <a name="createuser" id="createuser" class="btn btn-primary" href="../views/createuser.php" role="button">Crear Usuario</a>
+
+                <button type="submit" class="btn btn-primary">Ingresar</button>
+                
+              </div>
+
+            </form>
+
+          </div>
+
         </div>
-     </div>
+
+      </div>
+
     </main>
 
   </body>

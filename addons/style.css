@@ -1,3 +1,52 @@
+@font-face {
+    font-family:Holland Land ;
+    src: url(fuentes/holland_land/Holland\ Land.ttf);
+}
+
+@font-face{
+    font-family:Socake;
+    src: url(fuentes/socake/Socake.ttf);
+}
 body{
-    background-color: aquamarine;
+    background-color: #fffaf1;
+    margin: 30px;
+}
+h1{
+    font-family: Socake;
+    color: #6787d9; 
+    font-size:110px;
+    text-align: center;
+    text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68; 
+}
+.card {
+    font-family: Holland Land;
+    font-size: 30px;
+    background-color: #51c1da;
+    font-weight: lighter;
+    margin-top: 10%;
+}
+.card-title {
+    font-weight: bold;
+    font-size: 45px;
+}
+
+.card-header{
+    background-color: #8fd8d2;
+
+}
+.card-footer{
+    background-color: #8fd8d2;
+}
+
+.btn{
+   font-size: 25px;
+   width: 90px;
+   padding: 4px;
+}
+img{
+    width: 95%;
+    height: 95%;
+}
+.row{
+    margin-top: 100px;
 }

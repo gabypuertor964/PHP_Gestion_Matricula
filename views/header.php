@@ -30,8 +30,8 @@
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
         <!--Link Hoja de Estios Propia-->
-        <link rel="stylesheet" href="<?php echo($_SESSION['prefix'])?>addons/style.css">
+        <link rel="stylesheet" href="addons/style.css">
 
     </head>
 
-    <body>
+    

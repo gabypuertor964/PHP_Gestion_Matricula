@@ -51,11 +51,23 @@
                                 class="form-control" name="edad" id="edad">
                             </div>
                             <div class="mb-3">
+                                <label for="" class="form-label">Selecciona Entidad a la que perteneciste</label>
+                                <select class="form-select form-select-lg" name="" id="">
+                                  <option selected>Selecciona uno</option>
+                                  <option value="">SENA - ADSO </option>
+                                  <option value="">SENA - TECNICO</option>
+                                  <option value="">SENA - TECNOLOGO</option>
+                                  <option value="">OTRA ENTIDAD </option>
+                                </select>
+                           </div>
+                            <div class="mb-3">
                               <label for="" class="form-label">Crear Contraseña</label>
                               <input type="password"
                                 class="form-control" name="contrasena" id="contrasena" aria-describedby="helpId" placeholder="Asegurate de que sea segura :)">
                             </div>
-                            
+
+                          
+
                           </div>
                           <div class="card-footer text-muted">
                              

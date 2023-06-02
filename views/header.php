@@ -1,9 +1,20 @@
+<?php
+
+    //Validar Si se definio el titulo de la cabecera de la pagina o define un valor por defecto
+    if(isset($_SESSION['title'])){
+        $title=$_SESSION['title'];
+    }else{
+        $title="Proceso Matricula";
+    }
+
+?>
+
 <!doctype html>
 <html lang="es">
     <head>
 
         <!--Titulo Header-->
-        <title><?php echo($_SESSION['title'])?></title>
+        <title><?php echo($title)?></title>
 
         <!--Codificacion de los caracteres-->
         <meta charset="utf-8">

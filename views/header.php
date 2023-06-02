@@ -1,17 +1,3 @@
-<?php
-
-    /*
-        En caso de que la variable de sesion este vacia, es decir, si alguien intenta acceder de forma directa al archivo header, el sistema lo redigira al login
-    */
-    if(session_status()==PHP_SESSION_NONE){
-        if(isset($_COOKIE['user_data'])){
-            header("Location: ../");
-        }else{
-            header("Location: home.php");
-        }
-    }
-?>
-
 <!doctype html>
 <html lang="es">
     <head>

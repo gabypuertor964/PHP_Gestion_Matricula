@@ -56,7 +56,7 @@
 
               <div class="card-footer text-muted">
 
-                <a name="createuser" id="createuser" class="btn btn-primary" href="../views/createuser.php" role="button">Crear Usuario</a>
+                <a name="createuser" id="createUser" class="btn btn-primary" href="views/createUser.php" role="button">Crear Usuario</a>
 
                 <button type="submit" class="btn btn-primary">Ingresar</button>
                 

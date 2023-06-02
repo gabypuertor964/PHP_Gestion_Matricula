@@ -9,7 +9,7 @@
 }
 body{
     background-color: #fffaf1;
-    margin: 30px;
+    margin: 25px;
 }
 h1{
     font-family: Socake;
@@ -23,7 +23,8 @@ h1{
     font-size: 30px;
     background-color: #51c1da;
     font-weight: lighter;
-    margin-top: 10%;
+    margin-top: 0%;
+
 }
 .card-title {
     font-weight: bold;
@@ -43,10 +44,16 @@ h1{
    width: 90px;
    padding: 4px;
 }
+a{
+    font-size: 25px;
+    width: 200px !important;
+    padding: 4px;
+ }
+
 img{
     width: 95%;
     height: 95%;
 }
-.row{
+#row_login{
     margin-top: 100px;
 }

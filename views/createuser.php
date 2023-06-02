@@ -1,29 +1,10 @@
-<?php
-  //Activacion de la sesion
-  session_start();
-
-  /*
-    Se enviara a traves al archivo header, la sigueinte informacion a traves de la variable SESSION:
-
-      1. Titulo de la Cabecera de la Pagina
-      2. Prefijo de ruta -> Este indicara, que tanto se debe afectar la ruta a los archivos de estilo, de acuerdo a la ubicacion de la vista
-
-  */
-  $_SESSION['title']="Inicio de Sesion";
-  $_SESSION['prefix']=null;
-
-  //Importar el archivo que contiene la cabecera de la pagina
-  require("views/header.php");
-?>
-
-
-  <header>
+<header>
     <!-- place navbar here -->
   </header>
   <body>
     
     <main>
-      <h1>Bienvenido de nuevo!!!</h1>
+      <h1>Bienvenid@ !!!</h1>
       <div class="container col-md-12"> 
         <div class="row">
               <div class="col-md-6">
@@ -63,5 +44,3 @@
     <!-- place footer here -->
   </footer>
  
-
-  

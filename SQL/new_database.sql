@@ -320,3 +320,13 @@ CREATE TABLE matriculas(
     totalMatricula int NOT NULL COMMENT 'Valor final de la Matricula',
     fechaMatricula datetime NOT NULL COMMENT 'Fecha y Hora de la Matricula'
 );
+
+/*
+    Creacion de la llave foranea entre la tabla matriuclas(fkIdCurso) y la tabla cursos(idCurso)
+*/
+ALTER TABLE matriculas ADD FOREIGN KEY (fkIdCurso) REFERENCES cursos(idCurso);
+
+/*
+    Creacion de la llave foranea entre la tabla matriuclas(fkIdEstudiante ) y la tabla estudiantes(numDoc)
+*/
+ALTER TABLE matriculas ADD FOREIGN KEY (fkIdEstudiante) REFERENCES estudiantes(numDoc)

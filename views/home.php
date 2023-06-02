@@ -1,8 +1,4 @@
 <?php
-    session_start();
-    var_dump($_SESSION['data_user']);
-?>
-<?php
   //Activacion de la sesion
   session_start();
 

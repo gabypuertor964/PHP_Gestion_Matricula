@@ -20,6 +20,7 @@
   </head>
 
   <body>
+    
     <main>
 
       <h1>Bienvenido de nuevo!!!</h1>
@@ -44,12 +45,13 @@
               <div class="card-body">
 
                 <div class="mb-3">
-                  <label for="num_id" class="form-label">Número de identificación</label>
-                  <input type="number"class="form-control" name="num_id" id="num_id" aria-describedby="helpId" placeholder="">
+                  <label for="num_doc" class="form-label">Número de identificación</label>
+                  <input type="number"class="form-control" name="num_doc" id="num_doc" required>
                 </div>
+
                 <div class="mb-3">
-                  <label for="" class="form-label">Contraseña</label>
-                  <input type="password" class="form-control" name="contrasena" id="contrasena" aria-describedby="helpId" placeholder="">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <input type="password" class="form-control" name="password" id="password"  required min="8">
                 </div>
 
               </div>

@@ -26,7 +26,7 @@
 
       <div class="container col-md-12"> 
 
-        <div class="row">
+        <div class="row" id="row_login">
 
           <div class="col-md-6">
             <img src="addons/imagenes/inicio.png" >
@@ -59,7 +59,7 @@
                 <a name="createuser" id="createUser" class="btn btn-primary" href="views/createUser.php" role="button">Crear Usuario</a>
 
                 <button type="submit" class="btn btn-primary">Ingresar</button>
-                
+
               </div>
 
             </form>

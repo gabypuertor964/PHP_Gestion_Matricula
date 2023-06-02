@@ -20,11 +20,11 @@
   <body>
     
     <main>
-      <h1>Bienvenid@ !!!</h1>
+      
       <div class="container col-md-12"> 
+
+        <h1>Bienvenid@ !!!</h1> 
         <div class="row">
-              
-  
               <div class="col-md-6  text-center ">         
                   <div class="card ">
                       <div class="card-header">

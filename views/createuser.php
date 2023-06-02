@@ -64,7 +64,9 @@
                               <label for="" class="form-label">Crear Contraseña</label>
                               <input type="password"
                                 class="form-control" name="contrasena" id="contrasena" aria-describedby="helpId" placeholder="Asegurate de que sea segura :)">
+                                <small id="helpId" class="form-text text-muted">Crea una contraseña Minimo de 8 caracteres</small>
                             </div>
+                           
 
                           
 

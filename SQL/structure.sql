@@ -308,6 +308,21 @@ CREATE TABLE cursos(
 
         --
 
+        6. 
+
+            Nombre Campo: estado
+            Comentario: Estado Actual de la matricula 
+
+            Caracteristicas:
+
+                1. boolean: Campo booleano (Verdadero o Falso)
+
+                3. Not Null: Al llenar el registro, este campo no puede estar vacio
+
+            --
+
+        --
+
     --
 
 */
@@ -318,7 +333,8 @@ CREATE TABLE matriculas(
     subTotal int NOT NULL COMMENT 'Valor del Curso antes de aplicar el descuento',
     valorDescuento int NOT NULL COMMENT 'Valor del descuento el cual sera descontado del subtotal',
     totalMatricula int NOT NULL COMMENT 'Valor final de la Matricula',
-    fechaMatricula datetime NOT NULL COMMENT 'Fecha y Hora de la Matricula'
+    fechaMatricula datetime NOT NULL COMMENT 'Fecha y Hora de la Matricula',
+    estado boolean NOT NULL COMMENT 'Estado Actual de la matricula'
 );
 
 /*

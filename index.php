@@ -20,13 +20,11 @@
   </head>
 
   <body>
-    
     <main>
 
       <h1>Bienvenido de nuevo!!!</h1>
 
       <div class="container col-md-12"> 
-
         <div class="row" id="row_login">
 
           <div class="col-md-6">
@@ -41,7 +39,6 @@
             </div>
 
             <form action="controller/login.php" method="post">
-
               <div class="card-body">
 
                 <div class="mb-3">
@@ -57,21 +54,15 @@
               </div>
 
               <div class="card-footer text-muted">
-
-                <a name="createuser" id="btnCreateUser" class="createUser btn btn-primary" href="views/createUser.php" role="button">Crear Usuario</a>
+                <a name="createuser" id="btnCreateUser" class="createUser btn btn-primary" href="controller/createStudent.php?function=viewStudent" role="button">Crear Usuario</a>
 
                 <button type="submit" class="btn_login btn btn-primary">Ingresar</button>
-
               </div>
 
             </form>
-
           </div>
-
         </div>
-
       </div>
-
     </main>
 
   </body>

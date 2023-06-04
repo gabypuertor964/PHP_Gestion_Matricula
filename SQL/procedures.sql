@@ -149,3 +149,15 @@ BEGIN
 
     WHERE estado=1;
 END $$
+
+
+
+DELIMITER $$
+CREATE PROCEDURE consultarEntidades()
+
+BEGIN  
+    SELECT
+        *
+    FROM entidades
+
+END $$

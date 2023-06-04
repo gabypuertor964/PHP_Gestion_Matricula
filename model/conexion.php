@@ -20,15 +20,12 @@
          Tip: Se le definen unos valores por defecto, sin embargo, estos pueden ser modificados al momento de su instanciamiento
       */
       public function __construct($host="localhost",$user="root",$password="",$database="dbgestionmatriculas"){
-
-
          //Guardar la coneccion a la BD en el Atributo "db_conection", de la clase
          $this -> db_conection = new mysqli($host,$user,$password,$database);
-
       }
       
-     public function login($documento,$contraseña){
-
+      //Funcion encargada de realizar el proceso de validacion de login
+      public function login($documento,$contraseña){
          //Declaracion de arreglo el cual contendra la informacion de la validacion
          $data_return=[];
 
@@ -75,6 +72,11 @@
          //Retornado de los datos de la validacion
          return $data_return;
 
+      }
+
+      //Funcion encargada de consultar las entidades registradas
+      public function consultarEntidades(){
+         return $this -> db_conection ->query("CALL consultarEntidades()")->fetch_all();
       }
 
    }

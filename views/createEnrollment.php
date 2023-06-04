@@ -11,7 +11,7 @@
     header("Location: ../views/");
   }
 
-  var_dump($cursos);
+ 
   
   //Importar el archivo que contiene la cabecera de la pagina
   require("header.php");
@@ -23,47 +23,88 @@
     <div class="container text-center">
 
       <h1>Cursos Disponibles</h1>
-      
-      <table class="table table-bordered table-striped table-light">
-
-        <thead>
-          <tr>
-            <th>Nombre Curso</th>
-            <th>Fecha Inicio</th>
-            <th>Fecha Fin</th>
-            <th>Costo sin Descuento</th>
-            <th>Accion</th>
-          </tr>
-        </thead>
-
-        <tbody>
+      <div class="card text-black">
+       
+        <br>
+        <p>😊 Asegurate de Matricularte al curso que mas se ajuste a tus horarios 😉</p>
+        <div class="card-body">
           
-          <?php
-            foreach($cursos as $curso){
+            <table class="table table-bordered table-hover table-striped ">
 
-              var_dump($curso);
-              $idCurso=$curso[0];
-              $nombreCurso=$curso[1];
-              $fechaInicio=$curso[2];
-              $fechaFin=$curso[3];
+                <thead>
+                  <tr>
+                    <th>Nombre Curso</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Valor Total </th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
 
-              echo("
-                <tr>
-                  <td>$nombreCurso</td>
-                  <td>$fechaInicio</td>
-                  <td>$fechaFin</td>
-                  <td>$fechaFin</td>
-                </tr>
-              ");
-            }
+                <tbody>
 
-          ?>
+                    <tr>
+                      <td>Python</td>
+                      <td>2023-12-12</td>
+                      <td>2023-06-29</td>
+                      <td>20000</td>                   
+                      <td>
+                        <input class="btn-matricula" type="button" value="Matricularme">
+                     </td>
+                    </tr>
 
-        </tbody>
+                    <tr>
+                      <td>PHP</td>
+                      <td>2023-06-23</td>
+                      <td>2023-06-30</td>
+                      <td>250000</td>
+                      <td>
+                        <input class="btn-matricula"  type="button" value="Matricularme">
+                     </td>
+                    </tr>
 
-      </table>
+                    <tr>
+                      <td>JS</td>
+                      <td>2023-06-29</td>
+                      <td>2023-07-20</td>
+                      <td>300000</td>
+                      <td>
+                        <input  class="btn-matricula" type="button" value="Matricularme">
+                     </td>
+                    </tr>
 
 
+                    <tr>
+                      <td>Css</td>
+                      <td>2023-06-30</td>
+                      <td>2023-07-20</td>
+                      <td>79800</td>
+                      <td>
+                        <input class="btn-matricula" type="button" value="Matricularme">
+                     </td>
+                    </tr>
+
+
+                    <tr>
+                      <td>Java</td>
+                      <td>2023-07-01</td>
+                      <td>2023-07-23</td>
+                      <td>130000</td>
+                      <td>
+                        <input class="btn-matricula" type="button" value="Matricularme">
+                     </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+
+        </div>
+      </div>
+      
+      
     </div>
 
     

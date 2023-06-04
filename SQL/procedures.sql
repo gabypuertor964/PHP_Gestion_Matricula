@@ -113,11 +113,17 @@
     BEGIN  
         SELECT 
             password,
-            numDoc
+            numDoc,
+            entidades.nombreEntidad,
+            entidades.nombreGrupo,
+            edad
         FROM estudiantes 
         
+        LEFT JOIN entidades
+        ON entidades.idEntidad=estudiantes.fkIdEntidad
+        
         WHERE numDoc=num_doc;
-    END $$;
+    END
 --
 
 --Definicion: Procedimiento encargado de consultar aquellos cursos los cuales no hayan comenzado
@@ -152,4 +158,19 @@
 
         COMMIT;
     END $$
+--
+
+--Definicion: Procedimeinto encargado de validar la existencia de un curso segun su Identificador
+
+    DELIMITER $$
+    CREATE PROCEDURE validarCurso(IN id_curso int)
+    BEGIN
+        SELECT
+            idCurso
+        FROM cursos
+
+        WHERE idCurso=id_curso;
+    
+    END $$
+
 --

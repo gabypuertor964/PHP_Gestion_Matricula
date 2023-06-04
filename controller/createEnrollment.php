@@ -4,6 +4,32 @@
 
     $dbConection = new dbMatriculas();
 
+    //Funcion encargada de calcular el descuento a realizar segun la entidad, el grupo y la edad del estudiante
+    function calcularDescuento($entidad,$grupo,$edad){
+        $descuento=0;
+
+        //Descuento por IES
+        if($entidad=="SENA"){
+            $descuento+=35;
+
+            //Descuento por Subgrupo
+            if($grupo=="ADSO"){
+                $descuento+=15;
+            }
+        }else{
+            $descuento+=25;
+        }
+
+        //Descuento por edad
+        if($edad>=16 OR $edad<20){
+            $descuento+=15;
+        }elseif($edad>=20 OR $edad<=25){
+            $descuento+=10;
+        }
+
+        return $descuento/100;
+    }
+
     //Validar si se envio la variable 'function' a traves del metodo $_GET
     type_validation([[$_GET['function'],"all"]],"../");
 
@@ -12,11 +38,32 @@
 
         case "viewEnrollment":
 
+            //Activacion de la sesion
             session_start();
 
             //Obtener las entidades registradas y guardarlas en una variable de sesion
             $cursos = $dbConection->consultarCursos();
+
+            //Transformacion de Json a Object
+            $cookie_session=json_decode($_COOKIE['data_session']);
+
+            //Validacion de integridad de datos relevantes
+            type_validation(
+                [
+                    [$cookie_session->data_student->numDoc,"numeric"],
+                    [$cookie_session->data_student->nombreEntidad,"string"],
+                    [$cookie_session->data_student->nombreGrupo,"string"],
+                    [$cookie_session->data_student->edad,"numeric"]
+                ],
+                "../"
+            );
+
             $_SESSION['cursos']=$cursos;
+
+
+            $_SESSION['descuento']=calcularDescuento($cookie_session->data_student->nombreEntidad,$cookie_session->data_student->nombreGrupo,$cookie_session->data_student->edad);
+
+            var_dump($_SESSION['descuento']);
 
             //Redirigir a la vista correspondiente
             redireccion_rapida("../views/createEnrollment.php");
@@ -25,48 +72,55 @@
 
         case "newEnrollment":
 
-            //Guardar la informacion del formulario en sus respectivas variables
-            $documento=recuperacion_post("documento");
-            $nombreCompleto=recuperacion_post("nombreCompleto");
-            $edad=recuperacion_post("edad");
-            $idEntidad=recuperacion_post("idEntidad");
-            $password=recuperacion_post("password");
+            //Validacion de existencia de la informacion requerida
+            type_validation([[$_GET['idCurso'],'all']],"../views/");
 
-            //Validar el formato de la informacion recibida
+            //Activacion de la sesion
+            session_start();
+
+            //Consultar la Informacion del curso
+            $infoCurso=$dbConection->validarCurso($_GET['idCurso']);
+
+            //Validar si durante la conulta anterior pudo encontrar la informacion del curso segun el Identificador ingresado 
+            if($infoCurso==NULL){
+                $_SESSION['status']=FALSE;
+                $_SESSION['message']="Error, Curso no registrado en el sistema";
+
+                redireccion_rapida("../views/createEnrollment.php");
+            }
+
+            //Transformacion de Json a Object
+            $cookie_session=json_decode($_COOKIE['data_session']);
+
+            //Validacion de integridad de datos relevantes
             type_validation(
                 [
-                    [$documento,"numeric"],
-                    [$nombreCompleto,"string"],
-                    [$edad,"numeric"],
-                    [$idEntidad,"numeric"],
-                    [$password,"string"]
+                    [$cookie_session->data_student->numDoc,"numeric"],
+                    [$cookie_session->data_student->nombreEntidad,"string"],
+                    [$cookie_session->data_student->nombreGrupo,"string"],
+                    [$cookie_session->data_student->edad,"numeric"]
                 ],
-                "../createStudent.php"
+                "../"
             );
 
-            //Validar si el documento o el nombre ingresado en el formulario ya se encuentra registrado en el sistema
-            if(!$dbConection->validarEstudiante($documento,$nombreCompleto)){
-                redireccion_rapida("../createStudent.php");
+            $porcentajeDescuento = calcularDescuento($cookie_session->data_student->nombreEntidad,$cookie_session->data_student->nombreGrupo,$cookie_session->data_student->edad);
+
+            $valorDescuento=$infoCurso['precioNeto']-($infoCurso['precioNeto']*$porcentajeDescuento);
+
+            $valorTotal=$infoCurso['precioNeto']-$valorDescuento;
+
+            if(
+                $dbConection->registrarMatricula(
+                    $_GET['idCurso'],$cookie_session->data_student->numDoc,
+                    $infoCurso['precioNeto'],
+                    $valorDescuento,
+                    $valorTotal
+                )
+            ){
+                echo("Funciono");
             }
 
-            //Validar si el idEntidad ingresado en el formulario, corresponde a una entidad ya registrada
-            if($dbConection->validarEntidades($idEntidad)==NULL){
-                redireccion_rapida("../createStudent.php");
-            }
-
-            if($dbConection->registrarEstudiante($documento,$nombreCompleto,$password,$edad,$idEntidad)){
-
-                session_start();
-
-                $_SESSION['status']=TRUE;
-                $_SESSION['message']="Usuario Creado Exitosamente";
-
-                redireccion_rapida("../");
-            }else{
-                redireccion_rapida("../createStudent.php");
-            };
-
-
+            
         break;  
 
         default:

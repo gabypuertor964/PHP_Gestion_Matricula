@@ -30,7 +30,7 @@
          $data_return=[];
 
          //Guardado de la contraseña del estudiante en una variable
-         $password_student= $this -> db_conection -> query("CALL validarLogin($documento)")->fetch_assoc()['password'];
+         $data_student= $this -> db_conection -> query("CALL validarLogin($documento)")->fetch_assoc();
 
          //Permitir realizar una nueva consulta sobre la coneccion actual
          $this->db_conection->next_result();
@@ -40,13 +40,16 @@
 
             En caso de que alguna de las validaciones fallen, el sistema debera retornar el mesanje de error correspondiente
          */
-         if($password_student<>NULL && password_verify($contraseña,$password_student)){
+         if($data_student<>NULL && password_verify($contraseña,$data_student['password'])){
 
             //Indicar que la validacion fue exitosa
             $data_return['status']=TRUE;
 
             //Guardado del mensaje de que la validacion fue exitosa
             $data_return['message']="Has iniciado Sesion con exito";
+
+            //Guardado de la informacion del estudiante en la informacion de retorno
+            $data_return['data_student']=$data_student;
 
             //Guardado de la informacion de los cursos activos del estudiante en forma de arreglo asociativo
             $data_return['data_courses']=$this -> db_conection -> query("CALL consultarMatriculas($documento)")->fetch_assoc();
@@ -61,7 +64,7 @@
 
                En caso, de que la informacion si haya sido encontraad, significa que lo que fallo, fue la validacion de contraseña, por lo cual, debera generar su respectivo mensaje de error
             */
-            if($password_student==NULL){
+            if($data_student==NULL){
                $data_return['message']="No se encontro ningun estudiante con el numero de documento $documento";
             }else{
                $data_return['message']="Contraseña Incorrecta";
@@ -148,7 +151,14 @@
          //Generacion de la fecha y hora actual
          $fecha_matricula=date("Y-m-d H:i:s");
 
-         return $this->db_conection->query("CALL registrarMatricula($id_curso,$id_estudiante,$sub_total,$valor_descuento,$total_matricula,$fecha_matricula)");
+         return $this->db_conection->query("CALL registrarMatricula($id_curso,$id_estudiante,$sub_total,$valor_descuento,$total_matricula,'$fecha_matricula')");
+      }
+
+      //Metodo encargado de emplear el procedimiento el cual valida si el Identificador ingresado corresponde a un curso ya registrado en el sistema
+      public function validarCurso($id_curso){
+         $this->db_conection->next_result();
+
+         return $this->db_conection->query("CALL validarCurso($id_curso)")->fetch_assoc();
       }
 
    }

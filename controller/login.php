@@ -36,7 +36,7 @@
     if($validacion_login['status']==TRUE){
 
         //Definicion de la informacion de los cursos del estudiante en forma de cookie
-        setcookie('data_courses',json_encode($validacion_login['data_courses']),time()+3600,"/");
+        setcookie('data_session',json_encode($validacion_login),time()+3600,"/");
 
         //Redireccion a la vista home
         header("Location: ../views/");

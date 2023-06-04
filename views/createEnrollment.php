@@ -5,13 +5,12 @@
   //Titulo Cabecera
   $_SESSION['title']="Registro Estudiante";
 
-  if(isset($_SESSION['cursos'])){
+  if(isset($_SESSION['cursos']) && isset($_SESSION['descuento'])){
     $cursos=$_SESSION['cursos'];
+    $descuento=$_SESSION['descuento'];
   }else{
     header("Location: ../views/");
   }
-
- 
   
   //Importar el archivo que contiene la cabecera de la pagina
   require("header.php");
@@ -23,87 +22,64 @@
     <div class="container text-center">
 
       <h1>Cursos Disponibles</h1>
-          <br> 
-        <h3>😊 Asegurate de Matricularte al curso que mas se ajuste a tus horarios 😉</h3>
-          <br>
-            <table class="table table-bordered table-hover table-striped ">
 
-                <thead>
-                  <tr>
-                    <th>Nombre Curso</th>
-                    <th>Fecha Inicio</th>
-                    <th>Fecha Fin</th>
-                    <th>Valor Total </th>
-                    <th>Acción</th>
-                  </tr>
-                </thead>
+      <!--Mostrar Los mensajes-->
+      <?php messageAlert();?>
 
-                <tbody>
+      <br> 
+      <h3>😊Asegurate de Matricularte al curso que mas se ajuste a tus horarios😉</h3>
+      <br>
 
-                    <tr>
-                      <td>Python</td>
-                      <td>2023-12-12</td>
-                      <td>2023-06-29</td>
-                      <td>20000</td>                   
-                      <td>
-                        <input class="btn-matricula" type="button" value="Matricularme">
-                     </td>
-                    </tr>
+      <table class="table table-bordered table-hover table-striped">
 
-                    <tr>
-                      <td>PHP</td>
-                      <td>2023-06-23</td>
-                      <td>2023-06-30</td>
-                      <td>250000</td>
-                      <td>
-                        <input class="btn-matricula"  type="button" value="Matricularme">
-                     </td>
-                    </tr>
+        <!--Cabecera Tabla-->
+        <thead>
+          <tr>
+            <th>Nombre Curso</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Valor Total</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
 
-                    <tr>
-                      <td>JS</td>
-                      <td>2023-06-29</td>
-                      <td>2023-07-20</td>
-                      <td>300000</td>
-                      <td>
-                        <input  class="btn-matricula" type="button" value="Matricularme">
-                     </td>
-                    </tr>
+        <!--Cuerpo Tabla-->
+        <tbody>
+          <?php
+            foreach($cursos as $curso){
 
+              $idCurso=$curso[0];
+              $nombreCurso=$curso[1];
+              $fechaInicio=$curso[2];
+              $fechaFin=$curso[3];
 
-                    <tr>
-                      <td>Css</td>
-                      <td>2023-06-30</td>
-                      <td>2023-07-20</td>
-                      <td>79800</td>
-                      <td>
-                        <input class="btn-matricula" type="button" value="Matricularme">
-                     </td>
-                    </tr>
+              $costoTotal=$curso[4]*$descuento;
 
+              echo("
+                <tr>
+                  <td>$nombreCurso</td>
+                  <td>$fechaInicio</td>
+                  <td>$fechaFin</td>
+                  <td>$costoTotal</td>
+                  <td>
+                    <form action='../controller/createEnrollment.php?function=newEnrollment&idCurso=$idCurso' method='POST'>
 
-                    <tr>
-                      <td>Java</td>
-                      <td>2023-07-01</td>
-                      <td>2023-07-23</td>
-                      <td>130000</td>
-                      <td>
-                        <input class="btn-matricula" type="button" value="Matricularme">
-                     </td>
-                    </tr>
+                      <button type='submit' class='btn-matricula btn-primary col-md-12 btn-matricula'>Matricularme</button>
+                      
+                    </form>
+                  </td>
+                </tr>
+              ");
+            }
 
-                </tbody>
+          ?> 
+        </tbody>
 
-            </table>
-
-
-
-        </div>
-      
-
-    
-
-
+      </table>
+    </div>
   </main>  
 </body>
  
+<?php
+  include("footer.php");
+?>

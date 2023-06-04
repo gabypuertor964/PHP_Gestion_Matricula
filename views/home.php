@@ -53,18 +53,19 @@
             </div>
             <div class='card-body'>
               
-              <table class='table table-striped table-light'>
+              <table class='table table-striped '>
                 <tbody>
-                
+                  <tr>
+                    <th>Fecha de Finalizacion:</th>
+                    <td>$data_courses->fechaFin</td>
+                 </tr>
+
                   <tr>
                     <th>Fecha de Inicio:</th>
                     <td>$data_courses->fechaInicio</td>
                   </tr>
 
-                  <tr>
-                    <th>Fecha de Finalizacion:</th>
-                    <td>$data_courses->fechaFin</td>
-                  </tr>
+                 
 
                 </tbody>
               </table>

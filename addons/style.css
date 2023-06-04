@@ -18,6 +18,9 @@ h1{
     text-align: center;
     text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68; 
 }
+h3{
+    font-family: Holland Land;
+}
 .card {
     font-family: Holland Land;
     font-size: 30px;
@@ -69,4 +72,11 @@ th{
 }
 td{
     background-color: #6fd4d1 !important;
+}
+table{
+    font-family: Holland Land;
+    font-size: 30px;
+    background-color: #51c1da;
+    font-weight: lighter;
+    margin-top: 0%;
 }

@@ -23,12 +23,9 @@
     <div class="container text-center">
 
       <h1>Cursos Disponibles</h1>
-      <div class="card text-black">
-       
-        <br>
-        <p>😊 Asegurate de Matricularte al curso que mas se ajuste a tus horarios 😉</p>
-        <div class="card-body">
-          
+          <br> 
+        <h3>😊 Asegurate de Matricularte al curso que mas se ajuste a tus horarios 😉</h3>
+          <br>
             <table class="table table-bordered table-hover table-striped ">
 
                 <thead>
@@ -102,10 +99,7 @@
 
 
         </div>
-      </div>
       
-      
-    </div>
 
     
 

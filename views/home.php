@@ -36,11 +36,13 @@
 
   <div class="container text-center">
 
-    <!--Impresion de Mensajes de unico uso-->
-    <?php messageAlert();?>
+
 
     <h1>Tus cursos</h1>
 
+     <!--Impresion de Mensajes de unico uso-->
+    <?php messageAlert();?>
+    
     <?php
   
       if($data_courses<>null){

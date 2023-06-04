@@ -51,9 +51,6 @@
             //Guardado de la informacion del estudiante en la informacion de retorno
             $data_return['data_student']=$data_student;
 
-            //Guardado de la informacion de los cursos activos del estudiante en forma de arreglo asociativo
-            $data_return['data_courses']=$this -> db_conection -> query("CALL consultarMatriculas($documento)")->fetch_assoc();
-
          }else{
             
             //Indicar que la validacion fue fallida
@@ -156,6 +153,13 @@
          $this->db_conection->next_result();
 
          return $this->db_conection->query("CALL validarCurso($id_curso)")->fetch_assoc();
+      }
+
+      //Metodo Encargado de Consultar las Matriculas activas del estudiante segun su numero de documento
+      public function consultarMatriculas($documento){
+         $this->db_conection->next_result();
+
+         return $this -> db_conection -> query("CALL consultarMatriculas($documento)")->fetch_assoc();
       }
 
    }

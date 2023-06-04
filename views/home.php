@@ -36,20 +36,23 @@
 
   <div class="container text-center">
 
-
-
     <h1>Tus cursos</h1>
 
-     <!--Impresion de Mensajes de unico uso-->
+    <!--Impresion de Mensajes de unico uso-->
     <?php messageAlert();?>
     
     <?php
-  
+
       if($data_courses<>null){
+
+        $nombreCurso=$data_courses['nombreCurso'];
+        $fechaFin=$data_courses['fechaFin'];
+        $fechaInicio=$data_courses['fechaInicio'];
+
         echo("
           <div class='card'>
             <div class='card-header'>
-              <h4 class='card-title'>$data_courses->nombreCurso</h4>  
+              <h4 class='card-title'>$nombreCurso</h4>  
             </div>
             <div class='card-body'>
               
@@ -57,15 +60,13 @@
                 <tbody>
                   <tr>
                     <th>Fecha de Finalizacion:</th>
-                    <td>$data_courses->fechaFin</td>
+                    <td>$fechaFin</td>
                  </tr>
 
                   <tr>
                     <th>Fecha de Inicio:</th>
-                    <td>$data_courses->fechaInicio</td>
+                    <td>$fechaInicio</td>
                   </tr>
-
-                 
 
                 </tbody>
               </table>

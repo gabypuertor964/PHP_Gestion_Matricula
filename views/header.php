@@ -10,7 +10,7 @@
   //Valisdar si esta definida la cookie
   if(isset($_COOKIE['data_session'])){
     //Guardado de la informacion de los cursos
-    $data_courses=json_decode($_COOKIE['data_session'])->data_courses;
+    $data_courses=$_SESSION['data_courses'];
   }else{
     header("Location: ../");
   }

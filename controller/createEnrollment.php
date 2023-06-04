@@ -109,11 +109,14 @@
 
             $valorTotal=$infoCurso['precioNeto']-$valorDescuento;
 
+            date_default_timezone_set('America/Bogota');
+
             //Generacion de la fecha y hora actual
             $fechaMatricula=date("Y-m-d H:i:s");
 
-            $_SESSION['curso']=NULL;
+            $_SESSION['cursos']=NULL;
 
+            //Validacion de la Operacion en BD, para su posterior redireccion
             if(
                 $dbConection->registrarMatricula(
                     $_GET['idCurso'],$cookie_session->data_student->numDoc,
@@ -123,8 +126,6 @@
                     $fechaMatricula
                 )
             ){
-                
-
                 $_SESSION['status']=TRUE;
                 $_SESSION['message']="Se ha Matriculado Exitosamente";
 
@@ -143,8 +144,6 @@
 
                 redireccion_rapida("../views");
             }
-
-            
         break;  
 
         default:

@@ -39,7 +39,7 @@
         setcookie('data_session',json_encode($validacion_login),time()+3600,"/");
 
         //Redireccion a la vista home
-        header("Location: ../views/");
+        header("Location: dashboard.php");
 
     }else{
         redireccion_rapida("../");

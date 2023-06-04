@@ -9,7 +9,7 @@
     $cursos=$_SESSION['cursos'];
     $descuento=$_SESSION['descuento'];
   }else{
-    header("Location: ../views/");
+    header("Location: ../controller/dashboard.php");
   }
   
   //Importar el archivo que contiene la cabecera de la pagina

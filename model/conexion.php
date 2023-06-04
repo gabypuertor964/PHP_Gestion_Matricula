@@ -119,10 +119,19 @@
 
       //Metodo encargado de emplear el procedimiento el cual consulta todos los cuales aun no han comenzado
       public function consultarCursos(){
-
          $this->db_conection->next_result();
 
          return $this->db_conection->query("CALL consultarCursos()")->fetch_assoc();
+      }
+
+      //Metodo encargado de emplear el prodecimiento el cual registra una nueva matricula
+      public function registrarMatricula($id_curso,$id_estudiante,$sub_total,$valor_descuento,$total_matricula){
+         $this->db_conection->next_result();
+
+         //Generacion de la fecha y hora actual
+         $fecha_matricula=date("Y-m-d H:i:s");
+
+         return $this->db_conection->query("CALL registrarMatricula($id_curso,$id_estudiante,$sub_total,$valor_descuento,$total_matricula,$fecha_matricula)");
       }
 
    }

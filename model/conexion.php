@@ -145,11 +145,8 @@
       }
 
       //Metodo encargado de emplear el prodecimiento el cual registra una nueva matricula
-      public function registrarMatricula($id_curso,$id_estudiante,$sub_total,$valor_descuento,$total_matricula){
+      public function registrarMatricula($id_curso,$id_estudiante,$sub_total,$valor_descuento,$total_matricula,$fecha_matricula){
          $this->db_conection->next_result();
-
-         //Generacion de la fecha y hora actual
-         $fecha_matricula=date("Y-m-d H:i:s");
 
          return $this->db_conection->query("CALL registrarMatricula($id_curso,$id_estudiante,$sub_total,$valor_descuento,$total_matricula,'$fecha_matricula')");
       }

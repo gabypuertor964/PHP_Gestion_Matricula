@@ -109,15 +109,39 @@
 
             $valorTotal=$infoCurso['precioNeto']-$valorDescuento;
 
+            //Generacion de la fecha y hora actual
+            $fechaMatricula=date("Y-m-d H:i:s");
+
+            $_SESSION['curso']=NULL;
+
             if(
                 $dbConection->registrarMatricula(
                     $_GET['idCurso'],$cookie_session->data_student->numDoc,
                     $infoCurso['precioNeto'],
                     $valorDescuento,
-                    $valorTotal
+                    $valorTotal,
+                    $fechaMatricula
                 )
             ){
-                echo("Funciono");
+                
+
+                $_SESSION['status']=TRUE;
+                $_SESSION['message']="Se ha Matriculado Exitosamente";
+
+                $_SESSION['nombreCurso']=$infoCurso['nombre'];
+                $_SESSION['fechaInicio']=$infoCurso['fechaInicio'];
+                $_SESSION['fechaFin']=$infoCurso['fechaFin'];
+                $_SESSION['precioNeto']=$infoCurso['precioNeto'];
+                $_SESSION['descuento']=$valorDescuento;
+                $_SESSION['valorTotal']=$valorTotal;
+                $_SESSION['fechaMatricula']=$fechaMatricula;
+
+                redireccion_rapida("../views/detailedEnrollment.php");
+            }else{
+                $_SESSION['status']=FALSE;
+                $_SESSION['message']="Ha Ocurrido un Error, intentelo Nuevamente";
+
+                redireccion_rapida("../views");
             }
 
             

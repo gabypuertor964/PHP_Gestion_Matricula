@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2023 a las 06:54:32
+-- Tiempo de generación: 04-06-2023 a las 21:10:33
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -27,6 +27,15 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarCursos` ()   BEGIN  
+        SELECT 
+            * 
+        FROM cursos
+
+        WHERE fechaInicio>NOW();
+
+    END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarEntidades` ()   BEGIN  
     SELECT
         *
@@ -63,6 +72,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarEstudiante` (IN `num_doc` 
 
     END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarMatricula` (IN `id_curso` INT, IN `id_estudiante` INT, IN `sub_total` INT, IN `valor_descuento` INT, IN `total_matricula` INT, IN `fecha_matricula` DATETIME)   BEGIN  
+        START TRANSACTION;
+
+            INSERT INTO matriculas VALUES(null,id_curso,id_estudiante,sub_total,valor_descuento,total_matricula,fecha_matricula,1);
+
+        COMMIT;
+    END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `validarDocumento` (IN `num_doc` INT)   BEGIN
         SELECT
             numDoc
@@ -83,7 +100,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `validarEntidad` (IN `id_entidad` IN
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `validarLogin` (IN `num_doc` INT)   BEGIN  
     SELECT 
-        password
+        password,
+        numDoc
     FROM estudiantes 
     
     WHERE numDoc=num_doc;
@@ -119,7 +137,8 @@ CREATE TABLE `cursos` (
 --
 
 INSERT INTO `cursos` (`idCurso`, `nombre`, `fechaInicio`, `fechaFin`, `precioNeto`) VALUES
-(1, 'Python', '2023-06-16', '2023-06-29', 20000);
+(1, 'Python', '2023-12-12', '2023-06-29', 20000),
+(2, 'PHP', '2023-06-23', '2023-06-30', 250000);
 
 -- --------------------------------------------------------
 
@@ -162,7 +181,8 @@ CREATE TABLE `estudiantes` (
 
 INSERT INTO `estudiantes` (`numDoc`, `nombreCompleto`, `password`, `edad`, `fkIdEntidad`) VALUES
 (1019604621, 'LUIS', '$2y$10$u/cLZLgMRPp8XU5//mE.uOg0sXxJ.eFd7NSdvxLi410OhgCIopWpO', 17, 2),
-(1019604622, 'SANDRA GABRIELA PUERTO ROJAS', '$2y$10$0rcUoX0r.x6ubBoW/XlqG.4QR8Z0eXq3dUkQI2yaNUoPu37sgZmCS', 17, 1);
+(1019604622, 'SANDRA GABRIELA PUERTO ROJAS', '$2y$10$0rcUoX0r.x6ubBoW/XlqG.4QR8Z0eXq3dUkQI2yaNUoPu37sgZmCS', 17, 1),
+(2147483647, 'PEPE', '$2y$10$RGA/w/PZrsUsCexpdHuTSux5VS9TXCK15c3L./sHjl9ZAIc0tNKOu', 18, 2);
 
 -- --------------------------------------------------------
 
@@ -223,7 +243,7 @@ ALTER TABLE `matriculas`
 -- AUTO_INCREMENT de la tabla `cursos`
 --
 ALTER TABLE `cursos`
-  MODIFY `idCurso` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del Curso', AUTO_INCREMENT=2;
+  MODIFY `idCurso` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del Curso', AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `entidades`

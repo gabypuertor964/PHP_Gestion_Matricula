@@ -116,48 +116,87 @@ BEGIN
 
 END $$;
 
-/*
-    Nombre del Procedimiento: consultarMatriculas
-    Argumentos:
+--Definicion: Procedimiento encargado de consultar las matriculas activas del estudiante segun su numero de documento
 
-        1. num_doc (int): Numero de documento del estudiante 
+    DELIMITER $$
+    CREATE PROCEDURE consultarMatriculas(IN num_doc int)
 
-    --
-    Explicacion: Este metodo tiene como fin consultar el numero de matriculas activas de un estudiante
+    BEGIN  
+        SELECT
 
-    Aplicacion: Este metodo sera usado como parte del proceso de creacion de una nueva matricula, ya que inicialmente se debe confirmar que el estudiante actual no se encuntra inscrito en ningun curso
+            cursos.nombre,
+            cursos.fechaInicio,
+            cursos.fechaFin,
+            matriculas.total_matricula 
 
-*/
-DELIMITER $$
-CREATE PROCEDURE consultarMatriculas(IN num_doc int)
+        FROM matriculas 
 
-BEGIN  
-    SELECT
+        LEFT JOIN cursos
+        ON cursos.idCurso=fkIdCurso
 
-        cursos.nombre,
-        cursos.fechaInicio,
-        cursos.fechaFin,
-        matriculas.total_matricula 
+        LEFT JOIN estudiantes
+        ON estudiantes.numDoc=num_doc
 
-    FROM matriculas 
+        WHERE estado=1;
+    END $$
 
-    LEFT JOIN cursos
-    ON cursos.idCurso=fkIdCurso
+--
 
-    LEFT JOIN estudiantes
-    ON estudiantes.numDoc=num_doc
+--Definicion: Procedimiento encargado de consultar el listado de entidades registradas
 
-    WHERE estado=1;
-END $$
+    DELIMITER $$
+    CREATE PROCEDURE consultarEntidades()
+    BEGIN  
 
+        SELECT
+            *
+        FROM entidades
 
+    END $$
 
-DELIMITER $$
-CREATE PROCEDURE consultarEntidades()
+--
 
-BEGIN  
-    SELECT
-        *
-    FROM entidades
+--Definicion: Procedimiento encargado de consultar el numero de entidades segun su identificador
 
-END $$
+    DELIMITER $$
+    CREATE PROCEDURE validarEntidad(IN id_entidad int)
+    BEGIN
+        SELECT
+            count(idEntidad)
+        FROM entidades
+
+        WHERE idEntidad=id_entidad;
+    
+    END $$
+
+--
+
+--Definicion: Procedimiento encargado de consultar la existencia del estudiantes segun su numero de Documento
+
+    DELIMITER $$
+    CREATE PROCEDURE validarDocumento(IN num_doc int)
+    BEGIN
+        SELECT
+            numDoc
+        FROM estudiantes
+
+        WHERE numDoc=num_doc;
+    
+    END $$
+
+--
+
+--Definicion: Procedimiento encargado de consultar la existencia del estudiantes segun su nombre Completo
+
+    DELIMITER $$
+    CREATE PROCEDURE validarNombre(IN test varchar(60))
+    BEGIN
+        SELECT
+            nombreCompleto
+        FROM estudiantes
+
+        WHERE nombreCompleto=test;
+    
+    END $$
+
+--

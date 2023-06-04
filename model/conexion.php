@@ -74,9 +74,34 @@
 
       }
 
-      //Funcion encargada de consultar las entidades registradas
+      //Funcion encargada de emplear el procedimiento encargado de consultar la informacion de las entidades
       public function consultarEntidades(){
          return $this -> db_conection ->query("CALL consultarEntidades()")->fetch_all();
+      }
+
+      //Metodo encargado de emplear el procedimiento el cual valida si el Identificador ingresado corresponde a alguna entidad ya registrada
+      public function validarEntidades($id_entidad){
+
+         $this->db_conection->next_result();
+
+         return $this -> db_conection ->query("CALL validarEntidad($id_entidad)")->fetch_assoc();
+      }
+
+      //Metodo encargado de emplear el procedimiento el cual valida si el numero de documento corresponde a algun estudiante ya registrado
+      public function validarEstudiante($num_doc,$nombre_completo){
+
+         $validarNombre = $this->db_conection->query("CALL validarNombre('$nombre_completo')")->fetch_assoc();
+
+         $this->db_conection->next_result();
+
+         $validarDocumento=$this -> db_conection ->query("CALL validarDocumento($num_doc)")->fetch_assoc();
+
+         if($validarDocumento==NULL && $validarNombre==NULL){
+            return TRUE;
+         }else{
+            return FALSE;
+         }
+
       }
 
    }

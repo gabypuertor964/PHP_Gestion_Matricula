@@ -64,7 +64,7 @@
                   <td>
                     <form action='../controller/createEnrollment.php?function=newEnrollment&idCurso=$idCurso' method='POST'>
 
-                      <button type='submit' class='btn-matricula btn-primary col-md-12 btn-matricula'>Matricularme</button>
+                      <button type='submit' class='btn-matricula btn-primary col-md-12 '>Matricularme</button>
                       
                     </form>
                   </td>

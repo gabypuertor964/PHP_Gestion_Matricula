@@ -30,23 +30,37 @@
             <tbody>
               <tr>
                 <th class="col-md-6">Nombre Curso</th>
-                <td class="col-md-6">lore</td>
+                <td class="col-md-6">PHP</td>
               </tr>
               <tr>
-                <th >Nombre Curso</th>
-                <td>Php</td>
+                <th >Fecha Inicio</th>
+                <td></td>
               </tr>
               <tr>
-                <th>Nombre Curso</th>
-                <td>Php</td>
+                <th>Fecha Finalizacion</th>
+                <td></td>
               </tr>
-           
-             
-                   
-    
+              <tr>
+                <th>Subtotal</th>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Descuento</th>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Costo Total</th>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Fecha y Hora Inscripcion</th>
+                <td></td>
+              </tr>
+   
             </tbody>
     
           </table>
+          <a name="regresar" id="btn-regresar" class="btn btn-primary col-md-12" href="#" role="button">Volver al Inicio</a>
       </div>
     
     

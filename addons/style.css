@@ -59,6 +59,16 @@ h3{
     background-color: #08eaff;
     border-radius: 5px;
 }
+#btn-regresar{
+    background-color: #5ee1ff; 
+    color: black;
+    border-radius: 8px;
+    padding: 7px;
+    font-family: Holland Land;
+    font-size:30px;
+    letter-spacing:3px;
+
+}
 
 img{
     width: 95%;

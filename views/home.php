@@ -79,7 +79,7 @@
 
             <div class='card-footer text-muted'>
 
-              <a name='' id='btnCreateUser' class='btn_login btn btn-danger col-md-12' href='../controller/logOut.php' role='button'>Cerrar Sesion</a>
+              <a name='' class='btn btn-danger col-md-12' href='../controller/logOut.php' role='button' style='font-size:23px;'>Cerrar Sesion</a>
 
             </div>
 

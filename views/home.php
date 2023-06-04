@@ -5,14 +5,6 @@
   //Envio del titulo la pagina, a traves de la variable de sesion
   $_SESSION['title']="Dashboard";
 
-  //Valisdar si esta definida la cookie
-  if(isset($_COOKIE['data_courses'])){
-    //Guardado de la informacion de los cursos
-    $data_courses=json_decode($_COOKIE['data_courses']);
-  }else{
-    header("Location: ../");
-  }
-
   //Importar el archivo que contiene la cabecera de la pagina
   require("header.php");
 ?>
@@ -88,7 +80,7 @@
 
       }else{
         echo("
-          <a name='' id='' class='btn btn-primary btn-lg col-md-12' href='views/matricular.php' role='button'>Deseo Matricularme en un curso</a>
+          <a name='' id='' class='btn btn-primary btn-lg col-md-12' href='../controller/createEnrollment.php?function=viewEnrollment' role='button'>Deseo Matricularme en un curso</a>
         ");
       }
 

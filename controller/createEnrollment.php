@@ -10,20 +10,22 @@
     //Realizar ciertas acciones segun la variable 'function', validad anteriormente
     switch($_GET['function']){
 
-        case "viewStudent":
+        case "viewEnrollment":
 
             session_start();
 
             //Obtener las entidades registradas y guardarlas en una variable de sesion
-            $entidades = $dbConection->consultarEntidades();
-            $_SESSION['entidades']=$entidades;
+            $cursos = $dbConection->consultarCursos();
+            $_SESSION['cursos']=$cursos;
+
+            
 
             //Redirigir a la vista correspondiente
-            redireccion_rapida("../views/createUser.php");
+            redireccion_rapida("../views/createEnrollment.php");
 
         break;
 
-        case "newStudent":
+        case "newEnrollment":
 
             //Guardar la informacion del formulario en sus respectivas variables
             $documento=recuperacion_post("documento");

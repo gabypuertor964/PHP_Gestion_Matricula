@@ -117,5 +117,13 @@
 
       }
 
+      //Metodo encargado de emplear el procedimiento el cual consulta todos los cuales aun no han comenzado
+      public function consultarCursos(){
+
+         $this->db_conection->next_result();
+
+         return $this->db_conection->query("CALL consultarCursos()")->fetch_assoc();
+      }
+
    }
 ?>

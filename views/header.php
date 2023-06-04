@@ -7,6 +7,14 @@
         $title="Proceso Matricula";
     }
 
+    //Valisdar si esta definida la cookie
+    if(isset($_COOKIE['data_courses'])){
+        //Guardado de la informacion de los cursos
+        $data_courses=json_decode($_COOKIE['data_courses']);
+    }else{
+        header("Location: ../");
+    }
+
 ?>
 
 <!doctype html>

@@ -158,14 +158,30 @@ END $$;
 --
 
 --Definicion: Procedimiento encargado de validar la informacion ingresada en el Login
-DELIMITER $$
-CREATE PROCEDURE validarLogin(IN num_doc int)
+    DELIMITER $$
+    CREATE PROCEDURE validarLogin(IN num_doc int)
 
-BEGIN  
-    SELECT 
-        password
-    FROM estudiantes 
-    
-    WHERE numDoc=num_doc;
-END $$;
+    BEGIN  
+        SELECT 
+            password,
+            numDoc
+        FROM estudiantes 
+        
+        WHERE numDoc=num_doc;
+    END $$;
+--
+
+--Definicion: Procedimiento encargado de consultar aquellos cursos los cuales no hayan comenzado
+    DELIMITER $$
+    CREATE PROCEDURE consultarCursos()
+
+    BEGIN  
+        SELECT 
+            * 
+        FROM cursos
+
+        WHERE fechaInicio>NOW();
+
+    END $$;
+
 --

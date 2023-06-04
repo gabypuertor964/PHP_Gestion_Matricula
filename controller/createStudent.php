@@ -44,7 +44,7 @@
                 "../views/CreateUser.php"
             );
 
-            //Validar si el numero de documento ingresado en el formulario corresponde a un documento ya registrado
+            //Validar si el documento o el nombre ingresado en el formulario ya se encuentra registrado en el sistema
             if(!$dbConection->validarEstudiante($documento,$nombreCompleto)){
                 redireccion_rapida("../views/createUser.php");
             }
@@ -53,6 +53,13 @@
             if($dbConection->validarEntidades($idEntidad)==NULL){
                 redireccion_rapida("../views/createUser.php");
             }
+
+            if($dbConection->registrarEstudiante($documento,$nombreCompleto,$password,$edad,$idEntidad)){
+                redireccion_rapida("../");
+            }else{
+                redireccion_rapida("../views/createUser.php");
+            };
+
 
         break;  
     }

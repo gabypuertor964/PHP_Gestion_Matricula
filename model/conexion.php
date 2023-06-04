@@ -30,7 +30,7 @@
          $data_return=[];
 
          //Guardado de la contraseña del estudiante en una variable
-         $password_student= $this -> db_conection -> query("CALL studentValidate($documento)")->fetch_assoc()['password'];
+         $password_student= $this -> db_conection -> query("CALL validarLogin($documento)")->fetch_assoc()['password'];
 
          //Permitir realizar una nueva consulta sobre la coneccion actual
          $this->db_conection->next_result();
@@ -74,7 +74,7 @@
 
       }
 
-      //Funcion encargada de emplear el procedimiento encargado de consultar la informacion de las entidades
+      //Metodo encargado de emplear el metodo el cual consulta la informacion de las entidades
       public function consultarEntidades(){
          return $this -> db_conection ->query("CALL consultarEntidades()")->fetch_all();
       }
@@ -101,6 +101,19 @@
          }else{
             return FALSE;
          }
+
+      }
+
+      //Metodo encargado de emplear el procedimiento el cual registra un nuevo estudiante
+      public function registrarEstudiante($num_doc,$nombre_completo,$password,$edad,$id_entidad){
+
+         $this->db_conection->next_result();
+
+         //Generacion de Hash de contraseña y Transformacion del nombre a Mayusculas
+         $password_hash = password_hash($password,PASSWORD_DEFAULT);
+         $nombre_completo=strtoupper($nombre_completo);
+
+         return $this -> db_conection ->query("CALL registrarEstudiante($num_doc,'$nombre_completo','$password_hash',$edad,$id_entidad)");
 
       }
 

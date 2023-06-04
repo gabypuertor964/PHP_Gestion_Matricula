@@ -1,71 +1,4 @@
-/*
-    Nombre del Procedimiento: consultarEstudiante
-    Argumentos:
 
-        1. num_doc (int): Numero de documento del estudiante 
-
-    --
-    Explicacion: Este metodo tiene como fin consultar toda la informacion de un estudiante, segun su numero de documento
-
-    Aplicacion: Este metodo sera usado como parte de la validacion del login, ya que inicialmente se debe consulta si el numero de documento ingresado corresponde a un estudiante ya registrado, en caso de ser asi realizaria las demas validaciones correspondientes
-
-*/
-DELIMITER $$
-CREATE PROCEDURE studentValidate(IN num_doc int)
-
-BEGIN  
-    SELECT 
-        password
-    FROM estudiantes 
-    
-    WHERE numDoc=num_doc;
-END $$;
-
-/*
-    Nombre del Procedimiento: crearEstudiante
-    Argumentos:
-
-        1. num_doc (int): Numero de documento del estudiante 
-        2. nombre_completo (varchar(60)): Nombre Completo del Estudiante
-        3. password (varchar(255)): Contraseña Hasheada del estudiante
-        4. edad (int): Edad del estudiante
-        5. id_entidad (int): Identificador de la Entidad a la que pertenece el estudiante
-
-    --
-    Explicacion: Este metodo tiene como fin realizar el registro de un nuevo estudiante
-
-    Aplicacion: Este metodo sera usado como paso final en el proceso final de registro de un nuevo estudiante
-
-    Advertencias: 
-    
-        Desde el modelo, se debe validar que:
-
-            1. El nombre del nuevo estudiante no se encuentre ya registrado en la BD
-
-            2. El Id de la Entidad si este registrado en el sistema
-
-        --
-
-    --
-*/
-DELIMITER $$
-CREATE PROCEDURE registrarEstudiante(
-    IN num_doc int, 
-    IN nombre_completo varchar(60), 
-    IN password varchar(255),
-    IN edad int, 
-    IN id_entidad int
-)
-
-BEGIN  
-
-    START TRANSACTION;
-
-        INSERT INTO estudiantes VALUES(num_doc,nombre_completo,password,edad,id_entidad);
-
-    COMMIT;
-
-END $$;
 
 /*
     Nombre del Procedimiento: registrarMatricula
@@ -199,4 +132,40 @@ END $$;
     
     END $$
 
+--
+
+--Definicion: Procedimiento encargado del registro de un Nuevo estudiante
+
+    DELIMITER $$
+    CREATE PROCEDURE registrarEstudiante(
+        IN num_doc int, 
+        IN nombre_completo varchar(60), 
+        IN password varchar(255),
+        IN edad int, 
+        IN id_entidad int
+    )
+
+    BEGIN  
+
+        START TRANSACTION;
+
+            INSERT INTO estudiantes VALUES(num_doc,nombre_completo,password,edad,id_entidad);
+
+        COMMIT;
+
+    END $$;
+    
+--
+
+--Definicion: Procedimiento encargado de validar la informacion ingresada en el Login
+DELIMITER $$
+CREATE PROCEDURE validarLogin(IN num_doc int)
+
+BEGIN  
+    SELECT 
+        password
+    FROM estudiantes 
+    
+    WHERE numDoc=num_doc;
+END $$;
 --

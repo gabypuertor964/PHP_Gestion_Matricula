@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2023 a las 06:43:34
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Tiempo de generación: 04-06-2023 a las 06:54:32
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,48 +27,76 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-DROP PROCEDURE IF EXISTS `consultarEstudiante`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarEstudiante` (IN `num_doc` INT)   BEGIN  
-    SELECT 
-        * 
-    FROM estudiantes 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarEntidades` ()   BEGIN  
+    SELECT
+        *
+    FROM entidades;
 
-    INNER JOIN entidades
-    ON estudiantes.fkIdEntidad=entidades.idEntidad
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarMatriculas` (IN `num_doc` INT)   BEGIN  
+    SELECT
+     
+        cursos.nombre as 'nombreCurso',
+        cursos.fechaInicio,
+        cursos.fechaFin,
+        matriculas.totalMatricula 
+
+    FROM matriculas 
+
+    LEFT JOIN cursos
+    ON cursos.idCurso=fkIdCurso
+
+    LEFT JOIN estudiantes
+    ON estudiantes.numDoc=num_doc
+
+    WHERE estado=1;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarEstudiante` (IN `num_doc` INT, IN `nombre_completo` VARCHAR(60), IN `password` VARCHAR(255), IN `edad` INT, IN `id_entidad` INT)   BEGIN  
+
+        START TRANSACTION;
+
+            INSERT INTO estudiantes VALUES(num_doc,nombre_completo,password,edad,id_entidad);
+
+        COMMIT;
+
+    END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `validarDocumento` (IN `num_doc` INT)   BEGIN
+        SELECT
+            numDoc
+        FROM estudiantes
+
+        WHERE numDoc=num_doc;
+    
+    END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `validarEntidad` (IN `id_entidad` INT)   BEGIN
+        SELECT
+            *
+        FROM entidades
+
+        WHERE idEntidad=id_entidad;
+    
+    END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `validarLogin` (IN `num_doc` INT)   BEGIN  
+    SELECT 
+        password
+    FROM estudiantes 
     
     WHERE numDoc=num_doc;
 END$$
 
-DROP PROCEDURE IF EXISTS `registrarEstudiante`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarEstudiante` (IN `num_doc` INT, IN `nombre_completo` VARCHAR(60), IN `password` VARCHAR(255), IN `edad` INT, IN `id_entidad` INT)   BEGIN  
+CREATE DEFINER=`root`@`localhost` PROCEDURE `validarNombre` (IN `nombre_completo` VARCHAR(60))   BEGIN
+        SELECT
+            nombreCompleto
+        FROM estudiantes
 
-    START TRANSACTION;
-
-        INSERT INTO estudiantes VALUES(num_doc,nombre_completo,password,edad,id_entidad);
-
-    COMMIT;
-
-END$$
-
-DROP PROCEDURE IF EXISTS `registrarMatricula`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarMatricula` (IN `id_curso` INT, IN `id_estudiante` INT, IN `sub_total` INT, IN `valor_descuento` INT, IN `total_matricula` INT, IN `fecha_matricula` DATETIME)   BEGIN  
-
-    START TRANSACTION;
-
-        INSERT INTO matriculas VALUES(null,id_curso,id_estudiante,sub_total,valor_descuento,total_matricula,fecha_matricula,1);
-
-    COMMIT;
-
-END$$
-
-DROP PROCEDURE IF EXISTS `validarMatriculas`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `validarMatriculas` (IN `num_doc` INT)   BEGIN  
-    SELECT 
-        count(estado) as 'numMatriculas'
-    FROM matriculas 
-
-    WHERE numDoc=num_doc AND estado=1;
-END$$
+        WHERE nombreCompleto=nombre_completo;
+    
+    END$$
 
 DELIMITER ;
 
@@ -78,7 +106,6 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `cursos`
 --
 
-DROP TABLE IF EXISTS `cursos`;
 CREATE TABLE `cursos` (
   `idCurso` int(11) NOT NULL COMMENT 'Identificador del Curso',
   `nombre` varchar(50) NOT NULL COMMENT 'Nombre del Curso',
@@ -87,18 +114,33 @@ CREATE TABLE `cursos` (
   `precioNeto` int(11) NOT NULL COMMENT 'Valor base del curso'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `cursos`
+--
+
+INSERT INTO `cursos` (`idCurso`, `nombre`, `fechaInicio`, `fechaFin`, `precioNeto`) VALUES
+(1, 'Python', '2023-06-16', '2023-06-29', 20000);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `entidades`
 --
 
-DROP TABLE IF EXISTS `entidades`;
 CREATE TABLE `entidades` (
   `idEntidad` int(11) NOT NULL COMMENT 'Idenificador de la entidad',
   `nombreEntidad` varchar(40) NOT NULL COMMENT 'Nombre de la Entidad',
   `nombreGrupo` varchar(40) NOT NULL COMMENT 'Nombre del subgrupo de la entidad'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `entidades`
+--
+
+INSERT INTO `entidades` (`idEntidad`, `nombreEntidad`, `nombreGrupo`) VALUES
+(1, 'SENA', 'ADSO'),
+(2, 'SENA', 'TECNICO'),
+(3, 'SENA', 'TECNOLOGO');
 
 -- --------------------------------------------------------
 
@@ -106,7 +148,6 @@ CREATE TABLE `entidades` (
 -- Estructura de tabla para la tabla `estudiantes`
 --
 
-DROP TABLE IF EXISTS `estudiantes`;
 CREATE TABLE `estudiantes` (
   `numDoc` int(11) NOT NULL COMMENT 'Numero de Documento del Estudiante',
   `nombreCompleto` varchar(60) NOT NULL COMMENT 'Nombre Completo del Estudiante',
@@ -115,13 +156,20 @@ CREATE TABLE `estudiantes` (
   `fkIdEntidad` int(11) NOT NULL COMMENT 'Llave Foranea tabla Entidades'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `estudiantes`
+--
+
+INSERT INTO `estudiantes` (`numDoc`, `nombreCompleto`, `password`, `edad`, `fkIdEntidad`) VALUES
+(1019604621, 'LUIS', '$2y$10$u/cLZLgMRPp8XU5//mE.uOg0sXxJ.eFd7NSdvxLi410OhgCIopWpO', 17, 2),
+(1019604622, 'SANDRA GABRIELA PUERTO ROJAS', '$2y$10$0rcUoX0r.x6ubBoW/XlqG.4QR8Z0eXq3dUkQI2yaNUoPu37sgZmCS', 17, 1);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `matriculas`
 --
 
-DROP TABLE IF EXISTS `matriculas`;
 CREATE TABLE `matriculas` (
   `idMatricula` int(11) NOT NULL COMMENT 'Identificador Matricula',
   `fkIdCurso` int(11) NOT NULL COMMENT 'Llave foranea Identificador del Curso',
@@ -175,19 +223,19 @@ ALTER TABLE `matriculas`
 -- AUTO_INCREMENT de la tabla `cursos`
 --
 ALTER TABLE `cursos`
-  MODIFY `idCurso` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del Curso';
+  MODIFY `idCurso` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del Curso', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `entidades`
 --
 ALTER TABLE `entidades`
-  MODIFY `idEntidad` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Idenificador de la entidad';
+  MODIFY `idEntidad` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Idenificador de la entidad', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `matriculas`
 --
 ALTER TABLE `matriculas`
-  MODIFY `idMatricula` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador Matricula';
+  MODIFY `idMatricula` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador Matricula', AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas

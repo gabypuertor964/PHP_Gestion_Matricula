@@ -62,6 +62,10 @@
 
 
         break;  
+
+        default:
+            redireccion_rapida("../");
+        break;
     }
 
 

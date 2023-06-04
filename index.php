@@ -45,8 +45,8 @@
               <div class="card-body">
 
                 <div class="mb-3">
-                  <label for="num_doc" class="form-label">Número de identificación</label>
-                  <input type="number"class="form-control" name="num_doc" id="num_doc" required>
+                  <label for="documento" class="form-label">Número de identificación</label>
+                  <input type="number" class="form-control" name="documento" id="documento" required>
                 </div>
 
                 <div class="mb-3">
@@ -58,9 +58,9 @@
 
               <div class="card-footer text-muted">
 
-                <a name="createuser" id="createUser" class="btn btn-primary" href="views/createUser.php" role="button">Crear Usuario</a>
+                <a name="createuser" id="btnCreateUser" class="createUser btn btn-primary" href="views/createUser.php" role="button">Crear Usuario</a>
 
-                <button type="submit" class="btn btn-primary">Ingresar</button>
+                <button type="submit" class="btn_login btn btn-primary">Ingresar</button>
 
               </div>
 

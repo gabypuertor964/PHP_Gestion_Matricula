@@ -11,15 +11,12 @@
 
 */
 DELIMITER $$
-CREATE PROCEDURE consultarEstudiante(IN num_doc int)
+CREATE PROCEDURE studentValidate(IN num_doc int)
 
 BEGIN  
     SELECT 
-        * 
+        password
     FROM estudiantes 
-
-    INNER JOIN entidades
-    ON estudiantes.fkIdEntidad=entidades.idEntidad
     
     WHERE numDoc=num_doc;
 END $$;
@@ -132,12 +129,23 @@ END $$;
 
 */
 DELIMITER $$
-CREATE PROCEDURE validarMatriculas(IN num_doc int)
+CREATE PROCEDURE consultarMatriculas(IN num_doc int)
 
 BEGIN  
-    SELECT 
-        count(estado) as 'numMatriculas'
+    SELECT
+
+        cursos.nombre,
+        cursos.fechaInicio,
+        cursos.fechaFin,
+        matriculas.total_matricula 
+
     FROM matriculas 
 
-    WHERE numDoc=num_doc AND estado=1;
+    LEFT JOIN cursos
+    ON cursos.idCurso=fkIdCurso
+
+    LEFT JOIN estudiantes
+    ON estudiantes.numDoc=num_doc
+
+    WHERE estado=1;
 END $$

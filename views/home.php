@@ -2,80 +2,98 @@
   //Activacion de la sesion
   session_start();
 
-  /*
-    Se enviara a traves al archivo header, la sigueinte informacion a traves de la variable SESSION:
-
-      1. Titulo de la Cabecera de la Pagina
-
-  */
+  //Envio del titulo la pagina, a traves de la variable de sesion
   $_SESSION['title']="Dashboard";
+
+  //Valisdar si esta definida la cookie
+  if(isset($_COOKIE['data_courses'])){
+    //Guardado de la informacion de los cursos
+    $data_courses=json_decode($_COOKIE['data_courses']);
+  }else{
+    header("Location: ../");
+  }
 
   //Importar el archivo que contiene la cabecera de la pagina
   require("header.php");
 ?>
 
 <header>
-    <!-- place navbar here -->
-  </header>
-  <body>
-    
-    <main>
+  <?php
+
+    //Validar si la variable de sesion "status" esta definida
+    if(isset($_SESSION['status'])){
       
-      <div class="container col-md-12"> 
+      //Guardar el mensaje 
+      $message=$_SESSION['message'];
 
-        <h1>Tus cursos </h1> 
-        <div class="row">
-              <div class="col-md-6  text-center ">         
-                  <div class="card ">
-                      <div class="card-header">
-                        <h4 class="card-title">Registrate</h4>
-                      </div>
-                      <form action="controller/login.php" method="post">
-                          <div class="card-body">
-                            <div class="mb-3">
-                              <label for="num_id" class="form-label">Número de identificación</label>
-                              <input type="number"class="form-control" name="num_id" id="num_id">
-                            </div>
-                            <div class="mb-3">
-                              <label for="nombres" class="form-label">Nombres</label>
-                              <input type="text" class="form-control" name="nombres" id="nombres"  placeholder="Digita tu nombre completo">
-                              
-                            </div>
-                            <div class="mb-3">
-                              <label for="apellidos" class="form-label">Apellidos</label>
-                              <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Digita tus Apellidos Completos">
-                            </div>
-                            <div class="mb-3">
-                              <label for="edad" class="form-label">Edad</label>
-                              <input type="number"
-                                class="form-control" name="edad" id="edad">
-                            </div>
-                            <div class="mb-3">
-                              <label for="" class="form-label">Crear Contraseña</label>
-                              <input type="password"
-                                class="form-control" name="contrasena" id="contrasena" aria-describedby="helpId" placeholder="Asegurate de que sea segura :)">
-                            </div>
-                            
-                          </div>
-                          <div class="card-footer text-muted">
-                             
-                              <button type="submit" class="btn btn-primary">Enviar</button>
-                          </div>
-                      </form>
-                      
-                  </div>
-                </div>
-                  <div class="col-md-6">
-                         <img src="../addons/imagenes/registrarse.png" >
-                  </div>
-                
+      //Mostrar el mensaje en forma de Alert Bootstrap
+      echo("
+        <div class='alert alert-success' role='alert'>
+          $message
         </div>
-     </div>
-    </main>
-  
-  </body>
+      ");
 
-  <footer>
-    <!-- place footer here -->
-  </footer>
- 
+      //Borrar la valiable de sesion "status"
+      $_SESSION['status']=null;
+    }
+
+  ?>
+</header>
+
+<main>
+
+  <div class="container text-center">
+
+    <h1>Tus cursos</h1>
+
+    <?php
+  
+      if($data_courses<>null){
+
+        echo("
+
+          <div class='card'>
+            <div class='card-header'>
+              <h4 class='card-title'>$data_courses->nombreCurso</h4>  
+            </div>
+            <div class='card-body'>
+              
+              <table class='table table-striped table-light'>
+                <tbody>
+                
+                  <tr>
+                    <th>Fecha de Inicio:</th>
+                    <td>$data_courses->fechaInicio</td>
+                  </tr>
+
+                  <tr>
+                    <th>Fecha de Finalizacion:</th>
+                    <td>$data_courses->fechaFin</td>
+                  </tr>
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+            <div class='card-footer text-muted'>
+
+              <a name='' id='btnCreateUser' class='btn_login btn btn-danger col-md-12' href='../controller/logOut.php' role='button'>Cerrar Sesion</a>
+
+            </div>
+
+          </div>
+        ");
+
+      }else{
+        echo("
+          <a name='' id='' class='btn btn-primary btn-lg col-md-12' href='views/matricular.php' role='button'>Deseo Matricularme en un curso</a>
+        ");
+      }
+
+    ?>
+
+  </div>
+  
+</main>

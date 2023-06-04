@@ -36,14 +36,15 @@
 
   <div class="container text-center">
 
+    <!--Impresion de Mensajes de unico uso-->
+    <?php messageAlert();?>
+
     <h1>Tus cursos</h1>
 
     <?php
   
       if($data_courses<>null){
-
         echo("
-
           <div class='card'>
             <div class='card-header'>
               <h4 class='card-title'>$data_courses->nombreCurso</h4>  
@@ -64,15 +65,11 @@
                   </tr>
 
                 </tbody>
-
               </table>
-
             </div>
 
             <div class='card-footer text-muted'>
-
               <a name='' class='btn btn-danger col-md-12' href='../controller/logOut.php' role='button' style='font-size:23px;'>Cerrar Sesion</a>
-
             </div>
 
           </div>
@@ -89,3 +86,7 @@
   </div>
   
 </main>
+
+<?php
+  include("footer.php");
+?>

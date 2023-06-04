@@ -138,7 +138,7 @@
       public function consultarCursos(){
          $this->db_conection->next_result();
 
-         return $this->db_conection->query("CALL consultarCursos()")->fetch_assoc();
+         return $this->db_conection->query("CALL consultarCursos()")->fetch_all();
       }
 
       //Metodo encargado de emplear el prodecimiento el cual registra una nueva matricula

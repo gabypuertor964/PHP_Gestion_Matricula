@@ -18,8 +18,6 @@
             $cursos = $dbConection->consultarCursos();
             $_SESSION['cursos']=$cursos;
 
-            
-
             //Redirigir a la vista correspondiente
             redireccion_rapida("../views/createEnrollment.php");
 
@@ -43,23 +41,29 @@
                     [$idEntidad,"numeric"],
                     [$password,"string"]
                 ],
-                "../views/CreateUser.php"
+                "../createStudent.php"
             );
 
             //Validar si el documento o el nombre ingresado en el formulario ya se encuentra registrado en el sistema
             if(!$dbConection->validarEstudiante($documento,$nombreCompleto)){
-                redireccion_rapida("../views/createUser.php");
+                redireccion_rapida("../createStudent.php");
             }
 
             //Validar si el idEntidad ingresado en el formulario, corresponde a una entidad ya registrada
             if($dbConection->validarEntidades($idEntidad)==NULL){
-                redireccion_rapida("../views/createUser.php");
+                redireccion_rapida("../createStudent.php");
             }
 
             if($dbConection->registrarEstudiante($documento,$nombreCompleto,$password,$edad,$idEntidad)){
+
+                session_start();
+
+                $_SESSION['status']=TRUE;
+                $_SESSION['message']="Usuario Creado Exitosamente";
+
                 redireccion_rapida("../");
             }else{
-                redireccion_rapida("../views/createUser.php");
+                redireccion_rapida("../createStudent.php");
             };
 
 

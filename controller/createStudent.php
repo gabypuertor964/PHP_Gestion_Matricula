@@ -19,7 +19,7 @@
             $_SESSION['entidades']=$entidades;
 
             //Redirigir a la vista correspondiente
-            redireccion_rapida("../views/createUser.php");
+            redireccion_rapida("../createStudent.php");
 
         break;
 
@@ -41,23 +41,52 @@
                     [$idEntidad,"numeric"],
                     [$password,"string"]
                 ],
-                "../views/CreateUser.php"
+                "../createStudent.php"
             );
 
+            session_start();
+
             //Validar si el documento o el nombre ingresado en el formulario ya se encuentra registrado en el sistema
-            if(!$dbConection->validarEstudiante($documento,$nombreCompleto)){
-                redireccion_rapida("../views/createUser.php");
+            $validationStudent=$dbConection->validarEstudiante($documento,$nombreCompleto);
+
+            //Revisar Validacion del documento y en caso de ser necesario generar el mensaje de error y realizar el redireccionamiento correspondiente
+            if($validationStudent['documento']==FALSE){
+                $_SESSION['status']=FALSE;
+                $_SESSION['message']="Error, ya se encuentra registrado este Documento";
+
+                redireccion_rapida("../createStudent.php");
+            }
+
+            //Revisar Validacion del nombre y en caso de ser necesario generar el mensaje de error y realizar el redireccionamiento correspondiente
+            if($validationStudent['nombre']==FALSE){
+                $_SESSION['status']=FALSE;
+                $_SESSION['message']="Error, ya se encuentra registrado este Nombre";
+
+                redireccion_rapida("../createStudent.php");
             }
 
             //Validar si el idEntidad ingresado en el formulario, corresponde a una entidad ya registrada
             if($dbConection->validarEntidades($idEntidad)==NULL){
-                redireccion_rapida("../views/createUser.php");
+
+                $_SESSION['status']=FALSE;
+                $_SESSION['message']="Error, Entidad no registrada";
+                
+                redireccion_rapida("../createStudent.php");
             }
 
+            //Validar si el registro del estudiante se realizo de forma exitosa, y generar su respectivo mensaje (Tanto Afirmativo como negativo)
             if($dbConection->registrarEstudiante($documento,$nombreCompleto,$password,$edad,$idEntidad)){
+
+                $_SESSION['status']=TRUE;
+                $_SESSION['message']="Felicidades, se ha registrado Exitosamente";
+
                 redireccion_rapida("../");
             }else{
-                redireccion_rapida("../views/createUser.php");
+
+                $_SESSION['status']=FALSE;
+                $_SESSION['message']="Ha ocurrido un error, intentelo de nuevo mas tarde";
+
+                redireccion_rapida("../createStudent.php");
             };
 
 

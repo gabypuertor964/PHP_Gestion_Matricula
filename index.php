@@ -25,6 +25,36 @@
       <h1>Bienvenido de nuevo!!!</h1>
 
       <div class="container col-md-12"> 
+
+        <!--Sistema de Impresion de Mensajes-->
+        <?php
+          session_start();
+
+          //Validar si hay algun mensaje activo
+          if(isset($_SESSION['status']) && isset($_SESSION['message'])){
+
+            //Guardar el mensaje en una variable y generar la clase css a usar en el alert
+            $message=$_SESSION['message'];
+
+            if($_SESSION['status']){
+              $cls_alert="success";
+            }else{
+              $cls_alert="danger";
+            }
+
+            //Imprimir el Alert
+            echo("
+              <div class='alert alert-$cls_alert' role='alert'>
+                $message
+              </div>
+            ");
+
+            //Borrar los datos del mensaje
+            $_SESSION['status']=$_SESSION['message']=null;
+          }
+
+        ?>
+      
         <div class="row" id="row_login">
 
           <div class="col-md-6">

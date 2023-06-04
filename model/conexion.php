@@ -90,17 +90,34 @@
       //Metodo encargado de emplear el procedimiento el cual valida si el numero de documento corresponde a algun estudiante ya registrado
       public function validarEstudiante($num_doc,$nombre_completo){
 
+         //Arreglo contenedor de las validaciones
+         $validations=[];
+
+         //En caso de no esta registrado el nombre, el metodo retornara nulo ya que no encontro la informacion
          $validarNombre = $this->db_conection->query("CALL validarNombre('$nombre_completo')")->fetch_assoc();
 
+         //Guardar el valor de la validacion segun la informacion recuperada en la consulta
+         if($validarNombre<>NULL){
+            $validations['nombre']=FALSE;
+         }else{
+            $validations['nombre']=TRUE;
+         }
+
+         //Permitir multi-query
          $this->db_conection->next_result();
 
+         //En caso de no esta registrado el documento, el metodo retornara nulo ya que no encontro la informacion
          $validarDocumento=$this -> db_conection ->query("CALL validarDocumento($num_doc)")->fetch_assoc();
 
-         if($validarDocumento==NULL && $validarNombre==NULL){
-            return TRUE;
+         //Guardar el valor de la validacion segun la informacion recuperada en la consulta
+         if($validarDocumento<>NULL){
+            $validations['documento']=FALSE;
          }else{
-            return FALSE;
+            $validations['documento']=TRUE;
          }
+
+         //Retornar valor Validaciones
+         return $validations;
 
       }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2023 a las 23:50:26
+-- Tiempo de generación: 05-06-2023 a las 01:59:50
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -221,7 +221,7 @@ CREATE TABLE `matriculas` (
 --
 
 INSERT INTO `matriculas` (`idMatricula`, `fkIdCurso`, `fkIdEstudiante`, `subTotal`, `valorDescuento`, `totalMatricula`, `fechaMatricula`, `estado`) VALUES
-(5, 1, 1019604622, 20000, 7000, 13000, '2023-06-04 23:40:15', 1);
+(24, 2, 1019604622, 250000, 87500, 162500, '2023-06-04 18:58:05', 1);
 
 --
 -- Índices para tablas volcadas
@@ -277,7 +277,7 @@ ALTER TABLE `entidades`
 -- AUTO_INCREMENT de la tabla `matriculas`
 --
 ALTER TABLE `matriculas`
-  MODIFY `idMatricula` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador Matricula', AUTO_INCREMENT=6;
+  MODIFY `idMatricula` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador Matricula', AUTO_INCREMENT=25;
 
 --
 -- Restricciones para tablas volcadas

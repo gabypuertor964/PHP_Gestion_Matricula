@@ -32,7 +32,7 @@
 
         SELECT
             *
-        FROM entidades
+        FROM entidades;
 
     END $$
 
@@ -102,7 +102,7 @@
 
         COMMIT;
 
-    END $$;
+    END $$
     
 --
 

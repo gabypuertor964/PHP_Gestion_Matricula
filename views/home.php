@@ -58,15 +58,17 @@
               
               <table class='table table-striped '>
                 <tbody>
-                  <tr>
-                    <th>Fecha de Finalizacion:</th>
-                    <td>$fechaFin</td>
-                 </tr>
 
                   <tr>
                     <th>Fecha de Inicio:</th>
                     <td>$fechaInicio</td>
                   </tr>
+
+                  <tr>
+                  <th>Fecha de Finalizacion:</th>
+                  <td>$fechaFin</td>
+                  
+               </tr>
 
                 </tbody>
               </table>

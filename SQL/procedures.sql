@@ -17,9 +17,9 @@
         ON cursos.idCurso=fkIdCurso
 
         LEFT JOIN estudiantes
-        ON estudiantes.numDoc=num_doc
+        ON estudiantes.numDoc=matriculas.fkIdEstudiante
 
-        WHERE estado=1;
+        WHERE estudiantes.numDoc=num_doc AND estado=1;
     END $$
 
 --

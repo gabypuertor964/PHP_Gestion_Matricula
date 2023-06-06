@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2023 a las 01:59:50
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 06-06-2023 a las 13:53:54
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -57,9 +57,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarMatriculas` (IN `num_doc` 
     ON cursos.idCurso=fkIdCurso
 
     LEFT JOIN estudiantes
-    ON estudiantes.numDoc=num_doc
+    ON estudiantes.numDoc=matriculas.fkIdEstudiante
 
-    WHERE estado=1;
+    WHERE estudiantes.numDoc=num_doc AND estado=1;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarEstudiante` (IN `num_doc` INT, IN `nombre_completo` VARCHAR(60), IN `password` VARCHAR(255), IN `edad` INT, IN `id_entidad` INT)   BEGIN  
@@ -195,9 +195,12 @@ CREATE TABLE `estudiantes` (
 --
 
 INSERT INTO `estudiantes` (`numDoc`, `nombreCompleto`, `password`, `edad`, `fkIdEntidad`) VALUES
-(1019604621, 'LUIS', '$2y$10$u/cLZLgMRPp8XU5//mE.uOg0sXxJ.eFd7NSdvxLi410OhgCIopWpO', 17, 2),
-(1019604622, 'SANDRA GABRIELA PUERTO ROJAS', '$2y$10$0rcUoX0r.x6ubBoW/XlqG.4QR8Z0eXq3dUkQI2yaNUoPu37sgZmCS', 17, 1),
-(2147483647, 'PEPE', '$2y$10$RGA/w/PZrsUsCexpdHuTSux5VS9TXCK15c3L./sHjl9ZAIc0tNKOu', 18, 2);
+(28427839, 'AMPARO RUEDA JAIMES', '$2y$10$EHlgvvnd0.P2LLOfK17oZO1k9MAYLdy/zvCPYshTfe/KoSc2PIFrW', 14, 1),
+(1019604622, 'SANDRA GABRIELA PUERTO ROJAS', '$2y$10$DFq0FzcADEzjontHmM5Y3uVwNOXsLT/KbQIMfk1X/wX6RKVi0UWXO', 17, 1),
+(1021392827, 'LUISITO COMUNICA', '$2y$10$foMb67zqaqTCX.GnqUF.QehpHP7hHhd7d6s6iq./WVkWgVx0k0WDG', 25, 3),
+(1021392828, 'JHOSTIN GARCIA', '$2y$10$2CcI/sj6S7v4YyS.poPLcOpk4mNYRCJJ.T7u9ixmXJugF6N1OZ1MC', 19, 3),
+(1023371462, 'ANDRES SORIANO', '$2y$10$Ql/4LJiLfwUgxIKLxRrxtubsS04pd2sAtqvTb0b9OZZBuua1ALQ6i', 17, 1),
+(1028481723, 'PEPE', '$2y$10$TqvJHr2xX/TSQrjFGUxFkeH8EvldeTff3CP/u.0ngL9WjHcScOCcC', 85, 1);
 
 -- --------------------------------------------------------
 
@@ -221,7 +224,11 @@ CREATE TABLE `matriculas` (
 --
 
 INSERT INTO `matriculas` (`idMatricula`, `fkIdCurso`, `fkIdEstudiante`, `subTotal`, `valorDescuento`, `totalMatricula`, `fechaMatricula`, `estado`) VALUES
-(24, 2, 1019604622, 250000, 87500, 162500, '2023-06-04 18:58:05', 1);
+(29, 1, 1028481723, 20000, 7000, 13000, '2023-06-06 06:32:58', 1),
+(30, 2, 1019604622, 250000, 87500, 162500, '2023-06-06 06:33:51', 1),
+(31, 2, 1023371462, 250000, 87500, 162500, '2023-06-06 06:36:06', 1),
+(32, 1, 1021392827, 20000, 10000, 10000, '2023-06-06 06:45:13', 1),
+(33, 1, 28427839, 20000, 7000, 13000, '2023-06-06 06:49:09', 1);
 
 --
 -- Índices para tablas volcadas
@@ -277,7 +284,7 @@ ALTER TABLE `entidades`
 -- AUTO_INCREMENT de la tabla `matriculas`
 --
 ALTER TABLE `matriculas`
-  MODIFY `idMatricula` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador Matricula', AUTO_INCREMENT=25;
+  MODIFY `idMatricula` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador Matricula', AUTO_INCREMENT=34;
 
 --
 -- Restricciones para tablas volcadas

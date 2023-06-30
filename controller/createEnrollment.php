@@ -63,8 +63,6 @@
 
             $_SESSION['descuento']=calcularDescuento($cookie_session->data_student->nombreEntidad,$cookie_session->data_student->nombreGrupo,$cookie_session->data_student->edad);
 
-            var_dump($_SESSION['descuento']);
-
             //Redirigir a la vista correspondiente
             redireccion_rapida("../views/createEnrollment.php");
 
